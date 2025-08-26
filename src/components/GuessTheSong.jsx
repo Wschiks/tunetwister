@@ -62,7 +62,7 @@ export default function GuessTheSong({ token, deviceId, playlistTracks, currentT
     }, [query, token]);
 
     return (
-        <div className="p-4 max-w-md mx-auto relative">
+        <div className="p-4 max-w-md mx-auto relative h-[350px]">
             <ColoredBox color={gameDivColor} />
             {isGuessCorrect === true && <NextSongButton onClick={startNewSong} />}
             <PlaylistControls
@@ -87,6 +87,7 @@ export default function GuessTheSong({ token, deviceId, playlistTracks, currentT
                     Start Game
                 </button>
             )}
+
         </div>
     );
 }

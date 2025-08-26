@@ -1,3 +1,5 @@
+//node exchange-code.mjs
+//script to get a Spotify access token
 import fetch from "node-fetch";
 import { token, client_id, client_secret, redirect_uri, code } from "./config.mjs";
 

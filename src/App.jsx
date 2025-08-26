@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import GuessTheSong from "./components/GuessTheSong";
 import { token} from "../spotify-player/config.mjs";
+import tunetwisterLogo from "./assets/tunetwister.png";
 
 
 const playlistId = "0bIUgov7PqxNuASp4dQGYU";
@@ -68,8 +69,13 @@ export default function App() {
 
 
     return (
-        <div className="p-6 ">
-            <h1 className="text-2xl font-bold mb-4">🎵 Playlist Player & Guess Game</h1>
+        <div className="p-6 align-middle justify-center w-screen text-center">
+
+            <img
+                src={tunetwisterLogo}
+                alt="Tunetwister logo"
+                className="mx-auto w-1/2 mb-6"
+            />
 
 
             <GuessTheSong
@@ -79,6 +85,8 @@ export default function App() {
                 currentTrackUri={currentTrackUri}
                 setCurrentTrackUri={setCurrentTrackUri}
             />
+
+
 
 
         </div>

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import {useState} from "react";
 
 
-export default function PlaylistControls({ token, deviceId, playlistTracks, currentTrackUri, setCurrentTrackUri }) {
+export default function PlaylistControls({token, deviceId, playlistTracks, currentTrackUri, setCurrentTrackUri}) {
     const [isPlaying, setIsPlaying] = useState(false);
 
     const restartTrack = async () => {
@@ -11,8 +11,8 @@ export default function PlaylistControls({ token, deviceId, playlistTracks, curr
             `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`,
             {
                 method: "PUT",
-                body: JSON.stringify({ uris: [currentTrackUri], position_ms: 0 }),
-                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+                body: JSON.stringify({uris: [currentTrackUri], position_ms: 0}),
+                headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}`},
             }
         );
         setIsPlaying(true);
@@ -23,7 +23,7 @@ export default function PlaylistControls({ token, deviceId, playlistTracks, curr
 
         await fetch(`https://api.spotify.com/v1/me/player/${isPlaying ? "pause" : "play"}?device_id=${deviceId}`, {
             method: "PUT",
-            headers: { Authorization: `Bearer ${token}` },
+            headers: {Authorization: `Bearer ${token}`},
         });
 
         setIsPlaying(!isPlaying);
@@ -39,8 +39,8 @@ export default function PlaylistControls({ token, deviceId, playlistTracks, curr
             `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`,
             {
                 method: "PUT",
-                body: JSON.stringify({ uris: [randomTrack], position_ms: 0 }),
-                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+                body: JSON.stringify({uris: [randomTrack], position_ms: 0}),
+                headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}`},
             }
         );
 
@@ -49,14 +49,18 @@ export default function PlaylistControls({ token, deviceId, playlistTracks, curr
     };
 
     return (
-        <div className="flex gap-2 mb-4">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={restartTrack}>
+        <div className="flex gap-2 mb-4 justify-center">
+            <button             className="inline-flex h-12 items-center justify-center rounded-md bg-neutral-950 px-6 font-medium text-neutral-50 shadow-lg shadow-neutral-500/20 transition active:scale-95"
+                                onClick={restartTrack}>
                 Restart
             </button>
-            <button className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600" onClick={togglePlayPause}>
+            <button             className="inline-flex h-12 items-center justify-center rounded-md bg-neutral-950 px-6 font-medium text-neutral-50 shadow-lg shadow-neutral-500/20 transition active:scale-95"
+
+                                onClick={togglePlayPause}>
                 {isPlaying ? "Pause" : "Play"}
             </button>
-            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" onClick={nextSongRandom}>
+            <button             className="inline-flex h-12 items-center justify-center rounded-md bg-neutral-950 px-6 font-medium text-neutral-50 shadow-lg shadow-neutral-500/20 transition active:scale-95"
+                                onClick={nextSongRandom}>
                 skip
             </button>
         </div>
