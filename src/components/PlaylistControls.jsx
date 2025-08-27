@@ -49,7 +49,7 @@ export default function PlaylistControls({token, deviceId, playlistTracks, curre
     };
 
     return (
-        <div className="flex gap-2 mb-4 justify-center">
+        <div className="flex gap-2 mb-4 justify-center ">
             <button             className="inline-flex h-12 items-center justify-center rounded-md bg-neutral-950 px-6 font-medium text-neutral-50 shadow-lg shadow-neutral-500/20 transition active:scale-95"
                                 onClick={restartTrack}>
                 Restart

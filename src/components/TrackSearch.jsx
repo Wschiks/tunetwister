@@ -9,6 +9,7 @@ export default function TrackSearch({ query, setQuery, results, handleGuess }) {
                 onChange={(e) => setQuery(e.target.value)}
                 className="w-full p-2 mb-2 border border-[#646CFF] rounded"
 
+
             />
             <div className="space-y-2">
                 {results.map((track) => (
