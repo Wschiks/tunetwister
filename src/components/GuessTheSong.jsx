@@ -13,6 +13,8 @@ export default function GuessTheSong({token, deviceId, playlistTracks, currentTr
     const [elapsedTime, setElapsedTime] = useState(0);
     const timerRef = useRef(null);
     const [isHidden, setIsHidden] = useState(true);
+    const [revealedTrack, setRevealedTrack] = useState(null);
+
 
     const handleClick = () => {
         setIsHidden(false); // show the div when button is clicked
@@ -33,10 +35,11 @@ export default function GuessTheSong({token, deviceId, playlistTracks, currentTr
 
         const randomTrack = playlistTracks[Math.floor(Math.random() * playlistTracks.length)];
         setCurrentTrackUri(randomTrack);
+        // Reset UI state for the new round
         setGameDivColor("black");
         setIsGuessCorrect(null);
         setQuery("");
-        setResults([]);
+        setRevealedTrack(null);
 
         await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
             method: "PUT",
@@ -50,12 +53,15 @@ export default function GuessTheSong({token, deviceId, playlistTracks, currentTr
         if (track.uri === currentTrackUri) {
             setGameDivColor("green");
             setIsGuessCorrect(true);
-            if (timerRef.current) clearInterval(timerRef.current); // ⬅️ stop timer
+            setRevealedTrack(track);
+            setQuery("");
+            if (timerRef.current) clearInterval(timerRef.current); // stop timer
         } else {
             setGameDivColor("red");
             setIsGuessCorrect(false);
         }
     };
+
 
     // clear interval when component unmounts
     useEffect(() => {
@@ -97,14 +103,17 @@ export default function GuessTheSong({token, deviceId, playlistTracks, currentTr
                     <div className="text-green-400 text-lg font-bold">✅ Solved in {elapsedTime}s</div>
                 )}
 
-                <ColoredBox color={gameDivColor}/>
-                {isGuessCorrect === true && <NextSongButton onClick={startNewSong}/>}
+                <ColoredBox color={gameDivColor} track={revealedTrack} />
+
+                {/*{isGuessCorrect === true && <NextSongButton onClick={startNewSong}/>}*/}
+
                 <PlaylistControls
                     token={token}
                     deviceId={deviceId}
                     playlistTracks={playlistTracks}
                     currentTrackUri={currentTrackUri}
                     setCurrentTrackUri={setCurrentTrackUri}
+                    startNewSong={startNewSong}
                 />
                 <TrackSearch
                     token={token}

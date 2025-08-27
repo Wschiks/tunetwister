@@ -1,10 +1,7 @@
 import {useEffect, useState} from "react";
 import GuessTheSong from "./components/GuessTheSong";
-import { token} from "../spotify-player/config.mjs";
+import {token} from "../spotify-player/config.mjs";
 import tunetwisterLogo from "./assets/tunetwister.png";
-
-
-
 
 
 const playlistId = "0bIUgov7PqxNuASp4dQGYU";
@@ -26,7 +23,6 @@ export default function App() {
                 getOAuthToken: (cb) => cb(token),
                 volume: 0.8,
             });
-
             player.addListener("ready", async ({device_id}) => {
                 console.log("Ready with Device ID", device_id);
                 setDeviceId(device_id);
@@ -40,11 +36,9 @@ export default function App() {
                     },
                 });
             });
-
             player.addListener("not_ready", ({device_id}) => {
                 console.log("Device went offline", device_id);
             });
-
             player.connect();
         };
 
@@ -66,20 +60,16 @@ export default function App() {
                 console.error("Error loading playlist tracks:", err);
             }
         }
-
         loadPlaylistTracks();
     }, []);
 
-
     return (
-        <div className="p-6 align-middle justify-center w-screen text-center">
-
+        <div className="p-6 align-middle justify-center w-screen text-center mt-[-200px]">
             <img
                 src={tunetwisterLogo}
                 alt="Tunetwister logo"
                 className="mx-auto w-1/2 mb-6"
             />
-
 
             <GuessTheSong
                 token={token}
@@ -88,10 +78,6 @@ export default function App() {
                 currentTrackUri={currentTrackUri}
                 setCurrentTrackUri={setCurrentTrackUri}
             />
-
-
-
-
         </div>
 
     );
